@@ -1,0 +1,16 @@
+{
+  // Mortgage Review — standalone Cloudflare Worker
+  "name": "mortgage-review",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-08-01",
+  "rules": [
+    { "type": "Text", "globs": ["**/*.html", "**/*.css"], "fallthrough": true }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mortgage-review-db",
+      "database_id": "12757000-2569-4a56-afb4-cdc4ee72de72"
+    }
+  ]
+}

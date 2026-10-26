@@ -1,0 +1,24 @@
+{
+  "name": "mortgage-review-standalone",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start:local": "bash start-local.sh",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute mortgage-reviews --remote --file=schema.sql",
+    "db:init:local": "wrangler d1 execute mortgage-reviews --local --file=schema.sql",
+    "test": "node --test test/worker.test.mjs test/calc.test.mjs test/import.test.mjs",
+    "test:browser": "node test/browser/run.mjs",
+    "test:audit": "node test/browser/audit-dump.mjs /tmp/audit.json && python3 test/browser/audit.py /tmp/audit.json",
+    "test:all": "npm test && npm run test:audit && npm run test:browser && npm run test:server",
+    "build": "python3 build/mkworker.py && python3 build/mkserver.py && python3 build-mobile.py worker/app.html mortgage-review-mobile.html $npm_package_version_tag",
+    "test:server": "node test/browser/server.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.92.0",
+    "playwright": "^1.56.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1"
+  }
+}
